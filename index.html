@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="App">
+<head>
+  <meta charset="UTF-8">
+  <title>TODO</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-controller="TodoController as TodoC">
+
+  <div ng-if="!TodoC.loggedin" class="login-box">
+    <input type="text" name="" id="" placeholder="username">
+    <input type="password" name="" id="" placeholder="password">
+    <input type="button" value="Login" ng-click="TodoC.login()">
+  </div>
+
+  <div class="wrapper" ng-if="TodoC.loggedin">
+    
+    <div class="clearfix">
+      <div class="fright">
+        <input type="button" value="logout" ng-click="TodoC.logout()">
+      </div>
+    </div>
+
+    <!-- <h2>{{ TodoC.title }}</h2> -->
+
+    <div>
+      <input type="text" ng-model="TodoC.opt.title" class="field">
+      <input type="date" ng-model="TodoC.opt.date" class="field">
+      <input type="button" value="add todo" ng-click="TodoC.addTodo()">
+      <div ng-show="TodoC.opt.title">
+        {{TodoC.opt.title}} - {{TodoC.opt.date | date: "yyyy-MM-dd"}}
+      </div>
+    </div>
+
+    <table class="todo-table">
+      <thead>
+        <tr>
+          <th width="1"></th>
+          <th>Title</th>
+          <th width="1">Deadline</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="(todoIdx, todo) in TodoC.getTodos()" ng-class="{completed: todo.completed}">
+          <td width="1">
+            <input type="checkbox" ng-model="todo.completed">
+          </td>
+          <td>
+            <span class="todo-title-text" ng-click="TodoC.showNotes(todoIdx)">{{todo.title}}</span>
+          </td>
+          <td width="1">
+            <span ng-if="todo.date" class="todo-date-text" ng-class="{due: TodoC.today == todo.date, passed: TodoC.today > todo.date, coming: TodoC.today < todo.date}">{{ todo.date | date: "yyyy-MM-dd" }}</span>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" class="footer-links">
+            <span class="lbl">
+              <input type="radio" id="radio-all" ng-model="TodoC.todoType" value="all">
+              <label for="radio-all">All ({{ TodoC.todos.length }})</label>
+            </span>
+            <span class="lbl">
+              <input type="radio" id="radio-completed" ng-model="TodoC.todoType" value="completed">
+              <label for="radio-completed">Completed ({{ TodoC.getTodos('completed').length }}) </label>
+            </span>
+            <span class="lbl">
+              <input type="radio" id="radio-incomplete" ng-model="TodoC.todoType" value="incomplete">
+              <label for="radio-incomplete">InComplete ({{ TodoC.getTodos('incomplete').length }})</label>
+            </span>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="notes-popup" ng-show="TodoC.showNote > -1">
+    <div class="ovl" ng-click="TodoC.closeNotes()"></div>
+    <div class="note-wrap">
+      <input type="text" ng-model="TodoC.opt.note">
+      <input type="button" value="add note" ng-click="TodoC.addNote()">
+      <ul>
+        <li ng-repeat="note in TodoC.todos[TodoC.showNote].notes">{{note}}</li>
+      </ul>
+    </div>
+  </div>
+  
+
+  <script src="js/lib/async.js"></script>
+  <script src="js/lib/angular.min.js"></script>
+  <script src="js/lib/ngStorage.js"></script>
+
+  <script src="js/app.js"></script>
+
+  <script src="js/controllers/todo-controller.js"></script>
+
+</body>
+</html>

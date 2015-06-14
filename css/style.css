@@ -1,0 +1,114 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: arial;
+  font-size: 13px;
+  cursor: default;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.fleft {
+  float: left;
+}
+.fright {
+  float: right;
+}
+
+
+.wrapper {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 500px;
+  width: 100%;
+}
+.todo-table {
+  margin-top: 40px;
+  width: 100%;
+}
+.todo-table td,
+.todo-table th {
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  text-align: left;
+}
+
+.todo-date-text {
+  display: block;
+  white-space: nowrap;
+}
+tr.completed {
+  color: #ccc;
+  text-decoration: line-through;
+}
+.footer-links span.lbl {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+.footer-links span.lbl input {
+  position: absolute;
+  opacity: 0;
+  left: -100px;
+  top: -100px;
+}
+.footer-links span.lbl label {
+  display: inline-block;
+  background: #f4f4f4;
+  border-radius: 2px;
+  color: #333;
+  margin-right: 5px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+.footer-links span.lbl :checked + label {
+  background: #333;
+  color: #fff;
+}
+.coming {
+  color: green;
+}
+.passed {
+  color: red;
+}
+.notes-popup .ovl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 999;
+}
+.notes-popup .note-wrap {
+  position: absolute;
+  width: 300px;
+  top: 50px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 0 3px #333;
+  z-index: 9999;
+  padding: 15px;
+}
+
+.login-box {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+
+
+
